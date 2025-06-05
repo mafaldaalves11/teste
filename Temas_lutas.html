@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temas e Lutas - Autorias Portuguesas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, #1a0a0a 0%, #2a0a0a 100%);
+      color: #f0f0f0;
+      min-height: 100vh;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container-futurista {
+      max-width: 1400px;
+      width: 100%;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header-futurista {
+      text-align: center;
+      padding: 3rem 0;
+      margin-bottom: 3rem;
+      border-bottom: 2px solid #ff3a6e;
+      background: rgba(30, 10, 15, 0.5);
+      box-shadow: 0 0 30px rgba(255, 58, 110, 0.2);
+      width: 100%;
+    }
+
+    .header-futurista h1 {
+      font-size: 3.5rem;
+      color: #ff3a6e;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(255, 58, 110, 0.7);
+      margin-bottom: 1.2rem;
+    }
+
+    .header-futurista p {
+      font-size: 1.5rem;
+      color: #ff8fa3;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .temas-lutas-futurista {
+      background: rgba(20, 5, 10, 0.3);
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      border: 2px solid #ff3a6e;
+      box-shadow: 0 0 25px rgba(255, 58, 110, 0.3);
+      text-align: center;
+      width: 100%;
+    }
+
+    .temas-lutas-futurista h3 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #ff3a6e;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(255, 58, 110, 0.5);
+    }
+
+    .temas-lutas-futurista .subtitulo {
+      font-size: 1.4rem;
+      margin-bottom: 3rem;
+      color: #ff8fa3;
+    }
+
+    .galeria-futurista {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 3rem;
+      justify-items: center;
+    }
+
+    .item-futurista {
+      background: rgba(30, 10, 15, 0.7);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 2px solid #ff3a6e;
+      box-shadow: 0 0 20px rgba(255, 58, 110, 0.3);
+      position: relative;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-futurista:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(255, 58, 110, 0.5);
+    }
+
+    .item-futurista img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-bottom: 2px solid #ff3a6e;
+    }
+
+    .descricao-futurista {
+      padding: 1rem 1.5rem; /* Ajuste do padding (reduzido) */
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #ff8fa3;
+      text-align: center;
+      background: rgba(40, 15, 20, 0.6);
+      flex-grow: 1;
+      display: flex;
+      align-items: center; /* Centraliza verticalmente */
+      justify-content: center;
+      min-height: 60px; /* Altura mínima para consistência */
+    }
+
+    /* Ajuste específico para o card "Liberdade Sexual" */
+    .item-futurista:nth-child(2) .descricao-futurista {
+      min-height: auto; /* Remove altura fixa */
+      padding: 0.8rem 1.5rem; /* Padding menor para textos curtos */
+    }
+
+    .livros-futurista {
+      padding: 1.2rem;
+      background: rgba(20, 5, 10, 0.8);
+      text-align: center;
+    }
+
+    .livros-futurista p {
+      font-weight: bold;
+      color: #ff3a6e;
+      margin-bottom: 0.7rem;
+      font-size: 1.1rem;
+    }
+
+    .livros-futurista ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      color: #ffb3c1;
+      font-size: 1rem;
+    }
+
+    .livros-futurista li {
+      margin-bottom: 0.5rem;
+    }
+
+    .livros-futurista em {
+      font-style: italic;
+      color: #ff8fa3;
+    }
+
+    .item-futurista::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff3a6e 0%, transparent 100%);
+      opacity: 0.7;
+    }
+
+    .item-futurista::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, #ff3a6e 100%);
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .galeria-futurista {
+        grid-template-columns: 1fr;
+      }
+
+      .header-futurista h1 {
+        font-size: 2.5rem;
+      }
+
+      .temas-lutas-futurista h3 {
+        font-size: 2.2rem;
+      }
+
+      .header-futurista p, .temas-lutas-futurista .subtitulo {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-futurista">
+    <header class="header-futurista">
+      <h1>Autorias Portuguesas</h1>
+      <p>Explorando as vozes femininas na literatura portuguesa contemporânea</p>
+    </header>
+
+    <section class="temas-lutas-futurista">
+      <h3>Temas e Lutas</h3>
+      <p class="subtitulo">Imagens fotográficas que representam os principais temas literários abordados pelas autoras portuguesas.</p>
+
+      <div class="galeria-futurista">
+        <div class="item-futurista">
+          <img src="https://i.ibb.co/xtPnDFcS/Picsart-25-06-04-18-42-55-913.jpg" alt="Condição Feminina">
+          <p class="descricao-futurista">Reflexo da mulher na sociedade – fragmentos da identidade imposta.</p>
+          <div class="livros-futurista"> 
+            <p>Livros recomendados:</p>
+            <ul>
+              <li><em>O dia dos prodígios</em>, Lídia Jorge</li>
+              <li><em>A Sibilia</em>, Agustina Bessa-Luís</li>
+              <li><em>Os anjos</em>, Teolinda Gersão</li>
+              <li><em>Tanta Gente, Mariana, As Palavras Poupadas</em>, Maria Judite de Carvalho</li>
+            </ul>
+          </div>
+        </div>
+        <div class="item-futurista">
+          <img src="https://i.ibb.co/pjyqyZcS/Picsart-25-06-04-18-43-08-474.jpg" alt="Liberdade Sexual">
+          <p class="descricao-futurista">O corpo como território de libertação.</p>
+          <div class="livros-futurista"> 
+            <p>Livros recomendados:</p>
+            <ul>
+              <li><em>A Casa dos Budas Ditosos</em>, João Ubaldo Ribeiro</li>
+              <li><em>As luzes de Leonor</em>, Maria Teresa Horta</li>
+              <li><em>A Última Dona</em>, Lídia Jorge</li>
+            </ul>
+          </div>
+        </div>
+        <div class="item-futurista">
+          <img src="https://i.ibb.co/67k7SHZV/Picsart-25-06-04-18-43-18-425.jpg" alt="Censura">
+          <p class="descricao-futurista">A palavra silenciada — bocas caladas e livros rasgados.</p>
+          <div class="livros-futurista"> 
+            <p>Livros recomendados:</p>
+            <ul>
+              <li><em>Imprensa e I Guerra Mundial Censura e propaganda 1914-1918</em>, Noémia Malva Novais</li>
+              <li><em>As Novas Cartas Portuguesas</em>, "Três Marias"</li>
+            </ul>
+          </div>
+        </div>
+        <div class="item-futurista">
+          <img src="https://i.ibb.co/jvn5z9n1/Picsart-25-06-04-18-44-00-615.jpg" alt="Maternidade">
+          <p class="descricao-futurista">Entre o cuidado e o abandono — o feminino como origem.</p>
+          <div class="livros-futurista"> 
+            <p>Livros recomendados:</p>
+            <ul>
+              <li><em>Não se pode morar nos olhos de um gato</em>, Ana Margarida de Carvalho</li>
+              <li><em>A Mãe de um Rio</em>, Agustina Bessa-Luís</li>
+            </ul>
+          </div>
+        </div>
+        <div class="item-futurista">
+          <img src="https://i.ibb.co/RFPtHrV/Picsart-25-06-04-18-43-35-229.jpg" alt="Identidade">
+          <p class="descricao-futurista">Máscaras e espelhos — o que é ser mulher e autora?</p>
+          <div class="livros-futurista"> 
+            <p>Livros recomendados:</p>
+            <ul>
+              <li><em>Fado ou Dentro de Ti Ver o Mar</em>, Inês Pedrosa</li>
+              <li><em>O Regresso de Júlia Mann a Paraty</em>, Teolinda Gersão</li>
+            </ul>
+          </div>
+        </div>
+        <div class="item-futurista">
+          <img src="https://i.ibb.co/LdhWZTtY/Picsart-25-06-04-18-43-25-332.jpg" alt="Resistência">
+          <p class="descricao-futurista">Punhos erguidos, livros na mão — palavras como armas.</p>
+          <div class="livros-futurista">
+            <p>Livros recomendados:</p>
+            <ul>
+              <li><em>Mulheres da Clandestinidade: Os testemunhos de uma experiência única</em>, Vanessa de Almeida</li>
+              <li><em>O Retorno</em>, Dulce Maria Cardoso</li>
+              <li><em>Um Bailarino na Batalha</em>, Hélia Correira</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

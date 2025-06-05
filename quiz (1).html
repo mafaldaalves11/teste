@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literatura Feminina Portuguesa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #0f0f1a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            padding: 15px 0;
+            background-color: rgba(139, 46, 64, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(139, 46, 64, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #8b2e40, #d84a6a);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(219, 46, 100, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            min-width: 150px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(to right, #d84a6a, #8b2e40);
+            box-shadow: 0 0 25px rgba(219, 46, 100, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(to right, #d84a6a, #8b2e40);
+            box-shadow: 0 0 10px 2px rgba(219, 46, 100, 0.7), 0 0 30px #8b2e40;
+            transform: translateY(-2px);
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a0a0e 0%, #3a1420 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 30px rgba(219, 46, 100, 0.3);
+            border-bottom: 1px solid #8b2e40;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(219, 46, 100, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(219, 46, 100, 0.7);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .content-section {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Estilos específicos do quiz */
+        #quiz-section {
+            background: linear-gradient(145deg, #1a0a0e 0%, #2a1018 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(219, 46, 100, 0.2);
+            border: 1px solid rgba(219, 46, 100, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #quiz-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(219, 46, 100, 0.05) 0%, transparent 70%);
+            animation: pulse 15s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #quiz-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #progress {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #d84a6a;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(219, 46, 100, 0.5);
+        }
+
+        #question {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            color: #f8d7da;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        #options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        #options button {
+            background: linear-gradient(145deg, #2a1018 0%, #3a1420 100%);
+            border: 1px solid rgba(219, 46, 100, 0.3);
+            color: #f8d7da;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #options button:hover:not(:disabled) {
+            background: linear-gradient(145deg, #3a1420 0%, #4a1828 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(219, 46, 100, 0.3);
+        }
+
+        #options button:disabled {
+            cursor: default;
+        }
+
+        #options button.correct {
+            background: linear-gradient(145deg, #1a5a2a 0%, #2a7a3a 100%);
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.5);
+            color: white;
+        }
+
+        #options button.incorrect {
+            background: linear-gradient(145deg, #5a1a2a 0%, #7a2a3a 100%);
+            box-shadow: 0 0 15px rgba(220, 53, 69, 0.5);
+            color: white;
+        }
+
+        #next-btn {
+            background: linear-gradient(to right, #8b2e40, #d84a6a);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px auto 0;
+            box-shadow: 0 5px 20px rgba(219, 46, 100, 0.3);
+            transition: all 0.3s ease;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #next-btn:hover {
+            background: linear-gradient(to right, #d84a6a, #8b2e40);
+            box-shadow: 0 5px 25px rgba(219, 46, 100, 0.5);
+            transform: translateY(-2px);
+        }
+
+        #next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .correct-result {
+            color: #28a745;
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+        }
+
+        .incorrect-result {
+            color: #dc3545;
+            text-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+        }
+
+        /* Botão de retornar à home */
+        #return-home-btn {
+            background: linear-gradient(to right, #4a1828, #6a2a3a);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px auto 0;
+            box-shadow: 0 5px 20px rgba(219, 46, 100, 0.3);
+            transition: all 0.3s ease;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #return-home-btn:hover {
+            background: linear-gradient(to right, #6a2a3a, #4a1828);
+            box-shadow: 0 5px 25px rgba(219, 46, 100, 0.5);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 15px;
+                border-radius: 20px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                padding: 12px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            #quiz-section {
+                padding: 1.5rem;
+                margin: 1.5rem;
+            }
+            
+            #question {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegação simplificada -->
+    <nav class="navbar">        
+        <button class="nav-btn active" onclick="window.location.href='index.html'">home</button>
+    </nav>
+
+    <header>
+        <h1>LITERATURA FEMININA PORTUGUESA</h1>
+    </header>
+
+    <!-- Seções de conteúdo -->
+    <main>
+        <section id="home" class="content-section active">
+            <!-- Conteúdo da Home -->
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h2 style="color: #d84a6a; font-family: 'Orbitron', sans-serif;">Bem-vindo ao Portal de Literatura Feminina Portuguesa</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6;">Explore a rica tradição das escritoras portuguesas através dos séculos. Descubra suas histórias, obras e contribuições para a literatura.</p>
+                <button class="nav-btn" onclick="showSection('quiz')" style="margin-top: 2rem; display: inline-block;">Iniciar Quiz</button>
+            </div>
+        </section>
+
+        <section id="quiz" class="content-section">
+            <!-- Conteúdo do Quiz -->
+            <div id="quiz-section">
+                <div id="quiz-container">
+                    <div id="progress">Pergunta 1 de 10</div>
+                    <div id="question"></div>
+                    <div id="options">
+                        <!-- As opções serão inseridas aqui pelo JavaScript -->
+                    </div>
+                    <button id="next-btn">Próxima Pergunta</button>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Array de perguntas e respostas
+        const questions = [
+            {
+                question: "Quem foi a primeira poeta portuguesa a publicar uma obra com grande reconhecimento no século XVII?",
+                options: [
+                    "Soror Violante do Céu",
+                    "Florbela Espanca",
+                    "Maria Amália Vaz de Carvalho",
+                    "Ana Plácido"
+                ],
+                answer: 0
+            },
+            {
+                question: "Qual obra de Soror Violante do Céu foi publicada em 1646?",
+                options: [
+                    "Livro de Mágoas",
+                    "Rimas Várias",
+                    "Herança de Lágrimas",
+                    "Novas Cartas Portuguesas"
+                ],
+                answer: 1
+            },
+            {
+                question: "Quem foi a autora de 'Herança de Lágrimas', publicado em 1867?",
+                options: [
+                    "Guiomar Torresão",
+                    "Ana Plácido",
+                    "Maria Amália Vaz de Carvalho",
+                    "Irene Lisboa"
+                ],
+                answer: 1
+            },
+            {
+                question: "Qual publicação periódica foi dirigida por Guiomar Torresão na década de 1870?",
+                options: [
+                    "Almanach das Senhoras",
+                    "Revista Feminina",
+                    "Jornal das Letras",
+                    "Gazeta Literária"
+                ],
+                answer: 0
+            },
+            {
+                question: "Quem foi a primeira mulher a receber o Prémio Camões em 1999?",
+                options: [
+                    "Hélia Correia",
+                    "Sophia de Mello Breyner",
+                    "Natália Correia",
+                    "Maria Velho da Costa"
+                ],
+                answer: 1
+            },
+            {
+                question: "Qual obra foi publicada pelas 'Três Marias' em 1972?",
+                options: [
+                    "Livro de Mágoas",
+                    "Novas Cartas Portuguesas",
+                    "Herança de Lágrimas",
+                    "Rimas Várias"
+                ],
+                answer: 1
+            },
+            {
+                question: "Quem foi a segunda mulher portuguesa a receber o Prémio Camões em 2015?",
+                options: [
+                    "Hélia Correia",
+                    "Ana Luísa Amaral",
+                    "Maria Teresa Horta",
+                    "Irene Lisboa"
+                ],
+                answer: 0
+            },
+            {
+                question: "Qual poetisa publicou 'Livro de Mágoas' em 1919?",
+                options: [
+                    "Florbela Espanca",
+                    "Sophia de Mello Breyner",
+                    "Natália Correia",
+                    "Ana Luísa Amaral"
+                ],
+                answer: 0
+            },
+            {
+                question: "Quem usou pseudónimos masculinos como 'Manuel Soares' para publicar crónicas?",
+                options: [
+                    "Maria Amália Vaz de Carvalho",
+                    "Irene Lisboa",
+                    "Guiomar Torresão",
+                    "Ana Plácido"
+                ],
+                answer: 1
+            },
+            {
+                question: "Qual autora recebeu o Poetry International Prize em 2022?",
+                options: [
+                    "Hélia Correia",
+                    "Ana Luísa Amaral",
+                    "Sophia de Mello Breyner",
+                    "Natália Correia"
+                ],
+                answer: 1
+            }
+        ];
+
+        // Variáveis do quiz
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+
+        // Elementos do DOM
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const nextButton = document.getElementById('next-btn');
+        const resultElement = document.getElementById('result');
+        const progressElement = document.getElementById('progress');
+
+        // Função para carregar a pergunta atual
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            questionElement.textContent = question.question;
+            optionsElement.innerHTML = '';
+            
+            // Atualiza o progresso
+            progressElement.textContent = `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+            
+            // Adiciona as opções
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.addEventListener('click', () => selectOption(index));
+                optionsElement.appendChild(button);
+            });
+            
+            // Esconde o botão "Próxima" até que uma opção seja selecionada
+            nextButton.style.display = 'none';
+            resultElement.textContent = '';
+            nextButton.disabled = true;
+        }
+
+        // Função para selecionar uma opção
+        function selectOption(index) {
+            // Remove a seleção anterior
+            const options = document.querySelectorAll('#options button');
+            options.forEach(option => {
+                option.disabled = true;
+            });
+            
+            // Marca a opção selecionada
+            selectedOption = index;
+            const question = questions[currentQuestion];
+            
+            // Verifica se a resposta está correta
+            if (index === question.answer) {
+                options[index].classList.add('correct');
+                resultElement.textContent = 'Resposta Correta!';
+                resultElement.className = 'correct-result';
+                score++;
+            } else {
+                options[index].classList.add('incorrect');
+                options[question.answer].classList.add('correct');
+                resultElement.textContent = 'Resposta Incorreta!';
+                resultElement.className = 'incorrect-result';
+            }
+            
+            // Mostra o botão "Próxima"
+            nextButton.style.display = 'block';
+            nextButton.disabled = false;
+        }
+
+        // Função para carregar a próxima pergunta
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                // Fim do quiz
+                showResults();
+            }
+        }
+
+        // Função para mostrar os resultados finais
+        function showResults() {
+            questionElement.textContent = '';
+            optionsElement.innerHTML = '';
+            nextButton.style.display = 'none';
+            progressElement.textContent = '';
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            let message = '';
+            
+            if (percentage >= 80) {
+                message = `Excelente! Você acertou ${score} de ${questions.length} perguntas (${percentage}%). Você é um expert em literatura feminina portuguesa!`;
+            } else if (percentage >= 60) {
+                message = `Bom trabalho! Você acertou ${score} de ${questions.length} perguntas (${percentage}%). Você conhece bem o assunto!`;
+            } else if (percentage >= 40) {
+                message = `Você acertou ${score} de ${questions.length} perguntas (${percentage}%). Continue estudando para melhorar!`;
+            } else {
+                message = `Você acertou ${score} de ${questions.length} perguntas (${percentage}%). Que tal revisar a linha do tempo e tentar novamente?`;
+            }
+            
+            resultElement.textContent = message;
+            resultElement.className = percentage >= 60 ? 'correct-result' : 'incorrect-result';
+            
+            // Adiciona botão para reiniciar o quiz
+            const restartButton = document.createElement('button');
+            restartButton.textContent = 'Fazer Quiz Novamente';
+            restartButton.className = 'nav-btn';
+            restartButton.style.margin = '20px auto 0';
+            restartButton.addEventListener('click', () => {
+                currentQuestion = 0;
+                score = 0;
+                loadQuestion();
+            });
+            optionsElement.appendChild(restartButton);
+            
+            // Botão para retornar à home
+            const returnHomeButton = document.createElement('button');
+            returnHomeButton.textContent = 'Voltar para Home';
+            returnHomeButton.className = 'nav-btn';
+            returnHomeButton.style.margin = '15px auto 0';
+            returnHomeButton.addEventListener('click', () => {
+                showSection('home');
+            });
+            optionsElement.appendChild(returnHomeButton);
+        }
+
+        // Função para mostrar seções
+        function showSection(sectionId) {
+            // Esconde todas as seções
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostra a seção selecionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Atualiza o botão ativo
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Se for a seção de quiz, carrega o quiz
+            if (sectionId === 'quiz') {
+                currentQuestion = 0;
+                score = 0;
+                loadQuestion();
+            }
+        }
+
+        // Event listeners
+        nextButton.addEventListener('click', nextQuestion);
+
+        // Inicia o quiz se a seção estiver ativa
+        if (document.getElementById('quiz').classList.contains('active')) {
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>

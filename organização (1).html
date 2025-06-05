@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Site com Abas</title>
+    <style>
+        /* Estilos das abas */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+        }
+        .tab-button.active {
+            background: #ddd;
+            font-weight: bold;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 5px 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botões das Abas -->
+    <div class="tab-container">
+        <button class="tab-button active" onclick="openTab('home')">Home</button>
+        <button class="tab-button" onclick="openTab('timeline')">Linha do Tempo</button>
+        <button class="tab-button" onclick="openTab('authors')">Autoras</button>
+        <button class="tab-button" onclick="openTab('themes')">Temas e Obras</button>
+        <button class="tab-button" onclick="openTab('quiz')">Quiz</button>
+    </div>
+
+    <!-- Conteúdo das Abas -->
+    <div id="home" class="tab-content active">
+        <h2>Bem-vindo!</h2>
+        <p>Este é o conteúdo da página inicial.</p>
+    </div>
+
+    <div id="timeline" class="tab-content">
+        <h2>Linha do Tempo</h2>
+        <p>Aqui vai a linha do tempo...</p>
+    </div>
+
+    <div id="authors" class="tab-content">
+        <h2>Autoras</h2>
+        <p>Aqui vai a lista de autoras...</p>
+    </div>
+
+    <div id="themes" class="tab-content">
+        <h2>Temas e Obras</h2>
+        <p>Aqui vai a lista de temas e obras...</p>
+    </div>
+
+    <div id="quiz" class="tab-content">
+        <h2>Quiz</h2>
+        <p>Aqui vai o quiz interativo...</p>
+    </div>
+
+    <script>
+        function openTab(tabId) {
+            // Esconde todos os conteúdos
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove a classe 'active' de todos os botões
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Mostra o conteúdo da aba selecionada
+            document.getElementById(tabId).classList.add('active');
+
+            // Ativa o botão clicado
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

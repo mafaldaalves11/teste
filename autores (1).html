@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoras Portuguesas em Destaque</title>
+    <style>
+        :root {
+            --primary: #ff2d75;
+            --secondary: #ff5e8a;
+            --dark: #d10047;
+            --light: #ffc0cb;
+            --accent: #ff1493;
+            --text: #33001a;
+            --bg: #1a000d;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--bg), #2a0015);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            padding: 15px 0;
+            background-color: rgba(139, 46, 64, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(139, 46, 64, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #8b2e40, #d84a6a);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(219, 46, 100, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            min-width: 150px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(to right, #d84a6a, #8b2e40);
+            box-shadow: 0 0 25px rgba(219, 46, 100, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(to right, #d84a6a, #8b2e40);
+            box-shadow: 0 0 10px 2px rgba(219, 46, 100, 0.7), 0 0 30px #8b2e40;
+            transform: translateY(-2px);
+        }
+
+        
+        h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--accent), 0 0 20px rgba(255, 20, 147, 0.5);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin-left: 20px;
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px var(--accent);
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+        
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 25px;
+            padding: 25px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 50px;
+            background: rgba(255, 20, 147, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(255, 20, 147, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card {
+            flex: 0 0 auto;
+            width: 200px;
+            scroll-snap-align: start;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 45, 117, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 45, 117, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 45, 117, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255, 45, 117, 0.2);
+            box-shadow: 0 10px 25px rgba(255, 45, 117, 0.3);
+            border: 1px solid var(--primary);
+        }
+        
+        .card img {
+            width: 170px;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--secondary);
+            filter: grayscale(20%);
+            transition: filter 0.3s;
+        }
+        
+        .card:hover img {
+            filter: grayscale(0%);
+        }
+        
+        .card p {
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--light);
+            text-shadow: 0 0 5px var(--accent);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(145deg, #2a0015, #1a000d);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 0 30px var(--accent);
+            border: 1px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .close {
+            color: var(--light);
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+            text-shadow: 0 0 5px var(--accent);
+        }
+        
+        .close:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        .modal h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            text-align: center;
+        }
+        
+        .modal p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--light);
+        }
+        
+        .modal p strong {
+            color: var(--secondary);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+        }
+        
+        /* Scrollbar styling */
+        .carousel::-webkit-scrollbar {
+            height: 10px;
+        }
+        
+        .carousel::-webkit-scrollbar-track {
+            background: rgba(255, 45, 117, 0.1);
+            border-radius: 10px;
+        }
+        
+        .carousel::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 10px;
+            border: 2px solid var(--bg);
+        }
+        
+        .carousel::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+        
+        /* Futuristic elements */
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--light), 0 0 10px var(--light);
+            }
+            to {
+                text-shadow: 0 0 10px var(--primary), 0 0 20px var(--accent), 0 0 30px var(--accent);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card {
+                width: 160px;
+            }
+            
+            .card img {
+                width: 140px;
+                height: 190px;
+            }
+            
+            .modal-content {
+                width: 90%;
+                padding: 20px;
+            }
+            
+            iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Barra de navegação simplificada -->
+    <nav class="navbar">        
+        <button class="nav-btn active" onclick="window.location.href='index.html'">home</button>
+    </nav>
+    <section id="Autoras em destaque">
+        <h2 class="glow">Autoras em destaque</h2>
+
+        <div>
+            <h3>As Pioneiras (século XIX e início do século XX)</h3>
+            <div class="carousel">
+                <div class="card" onclick="openModal('mariacarvalho')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Maria_Am%C3%A1lia_Vaz_de_Carvalho.jpg" alt="Maria Amália Vaz de Carvalho">
+                    <p>Maria Amália Vaz de Carvalho (1847-1921)</p>
+                </div>
+
+                <div class="card" onclick="openModal('guiomar')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Guiomar_Torresao_1.jpg" alt="Guiomar Torresão">
+                    <p>Guiomar Torresão (1844–1898)</p>
+                </div>
+
+                <div class="card" onclick="openModal('anaplacido')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Ana_Placido_Fotografia.jpg" alt="Ana Plácido">
+                    <p>Ana Plácido (1831–1895)</p>
+                </div>
+
+                <div class="card" onclick="openModal('carolinamichaelis')">
+                    <img src="https://www.cdocfeminista.org/wp-content/uploads/2013/01/carolina_michaelis.jpg" alt="Carolina Michaëlis de Vasconcelos">
+                    <p>Carolina Michaëlis de Vasconcelos (1851–1925)</p>
+                </div>
+
+                <div class="card" onclick="openModal('alicemoderno')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Alice_Moderno.jpg/250px-Alice_Moderno.jpg" alt="Alice Moderno">
+                    <p>Alice Moderno (1867–1946)</p>
+                </div>
+
+                <div class="card" onclick="openModal('mariaoneill')">
+                    <img src="//upload.wikimedia.org/wikipedia/commons/9/97/D._Maria_O%27Neill_-_Brasil-Portugal_%2816Ago1912%29.png" alt="Maria O'Neill">
+                    <p>Maria O'Neill (1873–1932)</p>
+                </div>
+
+                <div class="card" onclick="openModal('emiliacosta')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/D._Em%C3%ADlia_Sousa_Costa_-_Brasil-Portugal_%281Jan1914%29.png" alt="Emília de Sousa Costa">
+                    <p>Emília de Sousa Costa (1877–1959)</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3>Modernismo e Estado Novo</h3>
+            <div class="carousel">
+                <div class="card" onclick="openModal('florbelaespanca')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Picture_of_Florbela_Espanca.jpg" alt="Florbela Espanca">
+                    <p>Florbela Espanca (1894–1930)</p>
+                </div>
+
+                <div class="card" onclick="openModal('irenelisboa')">
+                    <img src="https://www.nossapoesia.com/media/images/irene-lisboa.jpg" alt="Irene Lisboa">
+                    <p>Irene Lisboa (1892–1958)</p>
+                </div>
+
+                <div class="card" onclick="openModal('agustinabessa')">
+                    <img src="https://fotos.web.sapo.io/i/B3513baef/19683325_JcGJh.jpeg" alt="Agustina Bessa-Luís">
+                    <p>Agustina Bessa-Luís (1922–2019)</p>
+                </div>
+
+                <div class="card" onclick="openModal('mariajudite')">
+                    <img src="https://imagens.publico.pt/imagens.aspx/1634602?tp=UH&db=IMAGENS&type=JPG" alt="Maria Judite de Carvalho">
+                    <p>Maria Judite de Carvalho (1921–1998)</p>
+                </div>
+
+                <div class="card" onclick="openModal('mariateresahorta')">
+                    <img src="https://www.spn.pt/Media/Default/Info/64000/600/90/9/mthorta.jpg" alt="Maria Teresa Horta">
+                    <p>Maria Teresa Horta (1937–2024)</p>
+                </div>
+
+                <div class="card" onclick="openModal('mariaisabelbarreno')">
+                    <img src="https://www.cig.gov.pt/wp-content/uploads/2016/09/barrenopk.jpg" alt="Maria Isabel Barreno">
+                    <p>Maria Isabel Barreno (1939–2016)</p>
+                </div>
+                
+                <div class="card" onclick="openModal('mariavelhodacosta')">
+                    <img src="https://www.cnc.pt/wp-content/uploads/2020/05/maria-velho-da-costa-f-1.jpg" alt="Maria Velho da Costa">
+                    <p>Maria Velho da Costa (1938–2020)</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3>Pós-25 de Abril</h3>
+            <div class="carousel">
+                <div class="card" onclick="openModal('lídiajorge')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/L%C3%ADdia_Jorge_escritora_portuguesa.jpg/800px-L%C3%ADdia_Jorge_escritora_portuguesa.jpg" alt="Lídia Jorge">
+                    <p>Lídia Jorge (n. 1946)</p>
+                </div>
+
+                <div class="card" onclick="openModal('héliacorreia')">
+                    <img src="https://gappa.spautores.pt/img/c/46-category_default.jpg" alt="Hélia Correira">
+                    <p>Hélia Correia (n. 1949)</p>
+                </div>
+
+                <div class="card" onclick="openModal('teolindagersão')">
+                    <img src="https://imagens.publico.pt/imagens.aspx/1576323?tp=UH&db=IMAGENS&type=JPG" alt="Teolinda Gersão">
+                    <p>Teolinda Gersão (n. 1940)</p>
+                </div>
+
+                <div class="card" onclick="openModal('anahatherly')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Ana_Hatherly.png" alt="Ana Hatherly">
+                    <p>Ana Hatherly (1929–2015)</p>
+                </div>
+
+                <div class="card" onclick="openModal('luisanetojorge')">
+                    <img src="https://img.bertrand.pt/autor/imagem/luiza-neto-jorge/NDV8MTExNTcxN3wxNjc2NDU3MDQ3MDAwfGpwZWc=" alt="Luísa Neto Jorge">
+                    <p>Luísa Neto Jorge (1939–1989)</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3>Autoras contemporâneas</h3>
+            <div class="carousel">
+                <div class="card" onclick="openModal('dulcemariacardoso')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7IQF08fYsxrKmibalvaKCRnkaV8FWAzEmA&s" alt="Dulce Maria Cardoso">
+                    <p>Dulce Maria Cardoso (n. 1964)</p>
+                </div>
+
+                <div class="card" onclick="openModal('adílialopes')">
+                    <img src="https://sol.sapo.pt/wp-content/uploads/2025/01/adilialopes.assirioealvim-scaled.jpg" alt="Adília Lopes">
+                    <p>Adília Lopes (1960-2024)</p>
+                </div>
+
+                <div class="card" onclick="openModal('isabelafigueiredo')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Isabela_Figueiredo.jpg/250px-Isabela_Figueiredo.jpg" alt="Isabela Figueiredo">
+                    <p>Isabela Figueiredo (n. 1963)</p>
+                </div>
+
+                <div class="card" onclick="openModal('claudiasampaio')">
+                    <img src="https://vozfutura.org/wp-content/uploads/2023/11/image-53.png.webp" alt="Cláudia R. Sampaio">
+                    <p>Cláudia R. Sampaio (n. 1981)</p>
+                </div>
+
+                <div class="card" onclick="openModal('filipafonseca')">
+                    <img src="https://book.apel.pt/wp-content/uploads/2024/07/Filipa-Fonseca-Silva-1.jpg" alt="Filipa Fonseca Silva">
+                    <p>Filipa Fonseca Silva (n. 1979)</p>
+                </div>
+
+                <div class="card" onclick="openModal('helenamagalhães')">
+                    <img src="https://img.wook.pt/autor/imagem/helena-magalhaes/MXwxNTU3NzMwNnwxNjg1MDI1MjI3MDAwfGpwZWc=" alt="Helena Magalhães">
+                    <p>Helena Magalhães (n. 1958)</p>
+                </div>
+
+                <div class="card" onclick="openModal('gabrielarelvas')">
+                    <img src="https://img.wook.pt/autor/imagem/gabriela-relvas/MXwxNzcxNjgwNnwxNzE1MDc5NTI0MDAwfGpwZWc=" alt="Gabriela Relvas">
+                    <p>Gabriela Relvas (n. 1983)</p>
+                </div>
+            </div>
+
+            <div>
+                <h3>Autoras contemporâneas</h3>
+                <div class="carousel">
+                    <div class="card" onclick="openModal('ilselosa')">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/2/29/IlseLosa1.jpg" alt="Ilse Losa">
+                        <p>Ilse Losa (1913–2006)</p>
+                    </div>
+
+                    <div class="card" onclick="openModal('mariaalberta')">
+                        <img src="https://www.esquerda.net/sites/default/files/mariaalbertameneres_0.jpg" alt="Maria Alberta Menéres">
+                        <p>Maria Alberta Menéres (1930–2019)</p>
+                    </div>
+
+                    <div class="card" onclick="openModal('madalenasáfernandes')">
+                        <img src="https://penguinlivros.pt/wp-content/uploads/2025/04/0000979969.jpg" alt="Madalena Sá Fernandes">
+                        <p>Madalena Sá Fernandes (n. 1993)</p>
+                    </div>
+
+                    <div class="card" onclick="openModal('mafaldasantos')">
+                        <img src="https://penguinlivros.pt/wp-content/uploads/2024/01/0000966847.jpg" alt="Mafalda Santos">
+                        <p>Mafalda Santos (n. 1982)</p>
+                    </div>
+
+                    <div class="card" onclick="openModal('mariaisaac')">
+                        <img src="https://static.wixstatic.com/media/0162da_1abe9470c0fe4954b70723e75c7a8af8~mv2.jpeg/v1/fill/w_640,h_774,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0162da_1abe9470c0fe4954b70723e75c7a8af8~mv2.jpeg" alt="Maria Isaac">
+                        <p>Maria Isaac</p>
+                    </div>
+
+                    <div class="card" onclick="openModal('mgferrey')">
+                        <img src="https://img.wook.pt/autor/imagem/m-g-ferrey/MXwyMjA4NDE2OHwxNjIxODcyNjU3MDAwfHdlYnA=" alt="M. G. Ferrey">
+                        <p>M. G. Ferrey</p>
+                    </div>
+
+                    <div class="card" onclick="openModal('mariaalbertameneres')">
+                        <img src="https://images.rr.pt/maria_alberta_meneres_foto_porto_editora_editada1980ee7bdefaultlarge_1024.jpg" alt="Joana Bértholo">
+                        <p>Maria Alberta Menéres (1930-2019)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modais -->
+        <div id="mariacarvalho" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('mariacarvalho')">&times;</span>
+                <h3>Maria Amália Vaz de Carvalho (1847-1921)</h3>
+                <p><strong>📚Obras:</strong> <em>Uma Primavera de Mulher</em>; <em>Contos para os nossos filhos</em></p>
+                <p>📝Crítica literária, ensaísta, uma das primeiras mulheres a colaborar com jornais portugueses.</p>
+                <iframe width="100%" height="200" src="https://arquivos.rtp.pt/conteudos/maria-amalia-vaz-de-carvalho/" title="Vídeo sobre Maria Amália Vaz de Carvalho" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="guiomar" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('guiomar')">&times;</span>
+                <h3>Guiomar Torresão (1844–1898)</h3>
+                <p><strong>📚Obras:</strong> Artigos em revistas e crónicas políticas</p>
+                <p>📝Foi uma escritora portuguesa, feminista, e uma figura chave na emancipação das mulheres dos ideais da classe média em Portugal. É a fundadora do <em>Almanach das Senhoras</em>.</p>
+                <iframe width="100%" height="200" src="https://projectoadamastor.org/vozesfemininas-guiomar-torresao-1844-1898/" title="Artigo sobre Guiomar Torresão" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="anaplacido" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('anaplacido')">&times;</span>
+                <h3>Ana Plácido (1831–1895)</h3>
+                <p><strong>📚Obras:</strong> <em>Herança de Lágrimas</em></p>
+                <p>📝Foi uma escritora portuguesa que publicou romances, crónicas, poemas, contos e participou ativamente na imprensa portuguesa e brasileira do século XIX. Teve uma vida marcada por escândalo devido à sua relação com Camilo Castelo Branco.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/mHxf2ZFMtrX0" title="Vídeo sobre Ana Plácido" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="carolinamichaelis" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('carolinamichaelis')">&times;</span>
+                <h3>Carolina Michaëlis de Vasconcelos (1851–1925)</h3>
+                <p><strong>📚Obras:</strong> <em>Poesias de Sá de Miranda</em>, estudos linguísticos</p>
+                <p>📝Foi uma crítica literária, escritora, lexicógrafa e professora universitária de nacionalidade prussiana e portuguesa, tendo sido a primeira mulher a leccionar numa universidade portuguesa, nomeadamente na Universidade de Lisboa e posteriormente na Universidade de Coimbra, e uma das duas primeiras a entrar na Academia das Ciências. Teve igualmente grande importância como mediadora entre a cultura portuguesa e a cultura alemã.</p>
+                <iframe width="100%" height="200" src="https://comunidadeculturaearte.com/quem-foi-carolina-michaelis/" title="Artigo sobre Carolina Michaëlis" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="alicemoderno" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('alicemoderno')">&times;</span>
+                <h3>Alice Moderno (1867–1946)</h3>
+                <p><strong>📚Obras:</strong> <em>Aspirações</em>; <em>Instincto e dever</em></p>
+                <p>📝Foi uma professora, escritora, tradutora, jornalista, publicista e poetisa, que se distinguiu como feminista e ativista dos direitos dos animais. Fundou a Sociedade Micaelense Protectora dos Animais, pioneira na protecção destes no arquipélago dos Açores.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/6YJFT9TeGsk" title="Vídeo sobre Alice Moderno" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="mariaoneill" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('mariaoneill')">&times;</span>
+                <h3>Maria O'Neill (1873–1932)</h3>
+                <p><strong>📚Obras:</strong> <em>Versos</em>, traduções do francês</p>
+                <p>📝 Foi uma escritora, poetisa, feminista, jornalista, teosofista e tradutora com forte influência espiritualista.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/Db8nlJN2UbU" title="Vídeo sobre Maria O'Neill" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="emiliacosta" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('emiliacosta')">&times;</span>
+                <h3>Emília de Sousa Costa (1877–1959)</h3>
+                <p><strong>📚Obras:</strong> <em>Histórias da Tia Filomena</em>, <em>Fábulas e Contos</em></p>
+                <p>📝Foi uma escritora, contista e ativista do feminismo, considerada pioneira da literatura infantil na língua portuguesa. Foi casada com o magistrado e escritor Alberto de Sousa Costa.</p>
+                <iframe width="100%" height="200" src="https://tribop.pt/TPd/Em%C3%ADlia%20de%20Sousa%20Costa" title="Obras de Emília Costa" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="florbelaespanca" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('florbelaespanca')">&times;</span>
+                <h3>Florbela Espanca (1894–1930)</h3>
+                <p><strong>📚Obras:</strong> <em>Livro de Mágoas</em>, <em>Charneca em Flor</em></p>
+                <p>📝Foi uma poetisa portuguesa, conhecida pela sua escrita intensa e emotiva, abordando temas como o amor, a dor e a condição feminina. É considerada uma das precursoras do movimento feminista em Portugal. A sua vida, de apenas 36 anos, foi plena, embora tumultuosa, inquieta e cheia de sofrimentos íntimos, que a autora soube transformar em poesia da mais alta qualidade. Há uma biblioteca com o seu nome em Matosinhos.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/CDFAQgldX0A" title="Vídeo sobre Florbela Espanca" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="irenelisboa" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('irenelisboa')">&times;</span>
+                <h3>Irene Lisboa (1892–1958)</h3>
+                <p><strong>📚Obras:</strong> <em>Solidão</em>, <em>Começa uma Vida</em></p>
+                <p>📝Escritora, professora e pedagoga. Escreveu sob pseudónimos masculinos e destacou-se pelos seus diários e crónicas que exploravam a condição feminina e a vida quotidiana.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/ursCWv4kWGY" title="Vídeo sobre Irene Lisboa" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="agustinabessa" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('agustinabessa')">&times;</span>
+                <h3>Agustina Bessa-Luís (1922–2019)</h3>
+                <p><strong>📚Obras:</strong> <em>A Sibila</em>, <em>Fanny Owen</em>, <em>Vale Abraão</em></p>
+                <p>📝Conhecida não só como romancista, mas também como autora de peças de teatro, guiões de cinema, biografias, ensaios e livros infantis.Também se distinguiu enquanto articulista da "escola" do "jornalismo literário", tendo colaborado com assiduidade na imprensa. A autora revela preocupação pela condição social e cultural dos portugueses, particularmente interessada em perscrutar o passado, recorrendo à ficção para problematizar o conhecimento histórico e vivencial.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/CmPJJQha_Xs" title="Vídeo sobre Agustina Bessa-luís" allowfullscreen></iframe>
+            </div>
+        </div>
+
+         <div id="mariajudite" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('mariajudite')">&times;</span>
+                <h3>Maria Judite de Carvalho (1921–1998)</h3>
+                <p><strong>📚Obras:</strong> <em>Tanta Gente</em>, <em>Mariana</em>, <em>A Janela Fingida</em></p>
+                <p>📝Escritora e cronista, destacou-se pela análise crítica da sociedade portuguesa e das relações humanas. Apesar da notória qualidade e profundidade da sua obra e da sua escrita (entre o cómico e o grotesco, num registo ora trágico, ora ironicamente perverso), a autora permanece ainda desconhecida do grande público.</p>
+                <iframe width="100%" height="200" src="https://carruagem23.blogspot.com/2018/03/gi-george-georgina.html" title="Vídeo sobre Maria Judite de Carvalho" allowfullscreen></iframe>
+            </div>
+        </div>
+
+         <div id="mariateresahorta" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('mariateresahorta')">&times;</span>
+                <h3>Maria Teresa Horta (1937–2024)</h3>
+                <p><strong>📚Obras:</strong> <em>Minha Senhora de Mim</em>, <em>Novas Cartas Portuguesas</em></p>
+                <p>📝Poetisa e jornalista, conhecida pela sua luta pelos direitos das mulheres e pela liberdade de expressão.Foi uma das autoras do livro Novas Cartas Portuguesas, pelo qual foi processada e julgada em 1972, ao lado de Maria Isabel Barreno e Maria Velho da Costa.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/cW3Q16Q0QPM" title="Vídeo sobre Maria Teresa Horta" allowfullscreen></iframe>
+            </div>
+        </div>
+
+         <div id="mariaisabelbarreno" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('mariaisabelbarreno')">&times;</span>
+                <h3>Maria Isabel Barreno (1939–2016)</h3>
+                <p><strong>📚Obras:</strong> <em>A Imagem da Mulher</em>, <em>Novas Cartas Portuguesas</em></p>
+                <p>📝Escritora e ensaísta, coautora de Novas Cartas Portuguesas, obra que desafiou a censura do Estado Novo. Dedicou-se à causa do feminismo tendo feito parte do Movimento Feminista de Portugal.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/ANnwbKYnkxE" title="Vídeo sobre Maria Isabel Barreno" allowfullscreen></iframe>
+            </div>
+        </div>
+
+         <div id="mariavelhodacosta" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('mariavelhodacosta')">&times;</span>
+                <h3>IMaria Velho da Costa (1938–2020)</h3>
+                <p><strong>📚Obras:</strong> <em>Casas Pardas</em>, <em>Novas Cartas Portuguesas</em></p>
+                <p>📝Romancista e ensaísta, coautora de Novas Cartas Portuguesas, destacou-se pela inovação estilística e temática.</p>
+                <iframe width="100%" height="200" src="https://ensina.rtp.pt/artigo/maria-velho-da-costa-um-dia-senti-necessidade-de-escrever/" title="Vídeo sobre Maria Velho da Costa" allowfullscreen></iframe>
+            </div>
+        </div>
+
+
+         <div id="lídiajorge" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('lídiajorge')">&times;</span>
+                <h3>Lídia Jorge (n. 1946)</h3>
+                <p><strong>📚Obras:</strong> <em>O Dia dos Prodígios</em>, <em>O Vento Assobiando nas Gruas</em></p>
+                <p>📝Romancista e ensaísta do período pós- Revolução, aborda temas como a emigração, a condição feminina e o passado colonial e ditatorial.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/cSHIQreEySU" title="Vídeo sobre Lídia Jorge" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+         <div id="héliacorreia" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('héliacorreia')">&times;</span>
+                <h3>Hélia Correia (n. 1949)</h3>
+                <p><strong>📚Obras:</strong> <em>Adoecer</em></p>
+                <p>📝Escritora e dramaturga, conhecida pela reinterpretação de mitos clássicos e pela exploração da condição feminina. Foi galardoada com o Prémio Camões 2015.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/iPFGgKCBJHA" title="Vídeo sobre Hélia Correia" allowfullscreen></iframe>
+            </div>
+        </div>
+
+         <div id="teolindagersão" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('teolindagersão')">&times;</span>
+                <h3>Teolinda Gersão (n. 1940)</h3>
+                <p><strong>📚Obras:</strong> <em>A Casa da Cabeça de Cavalo</em>, <em>Os Teclados</em></p>
+                <p>📝Professora universitária, romancista e contista. As suas obras exploram a identidade, a memória e as relações humanas.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/lI8NJualJYE" title="Vídeo sobre Teolinda Gersão" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        
+         <div id="anahatherly" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('anahatherly')">&times;</span>
+                <h3>Ana Hatherly (1929–2015)</h3>
+                <p><strong>📚Obras:</strong> <em>O Escritor</em>, <em>A Idade da Escrita</em></p>
+                <p>📝Foi uma acadêmica, poeta, artista visual, ensaísta, cineasta, pintora e escritora portuguesa. Foi considerada uma das pioneiras do movimento da poesia experimental e da literatura experimental em Portugal.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/ncfdEa8UL4Y" title="Vídeo sobre Ana Hatherly" allowfullscreen></iframe>
+            </div>
+        </div>
+
+         <div id="luisanetojorge" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('luisanetojorge')">&times;</span>
+                <h3>Luísa Neto Jorge (1939–1989)</h3>
+                <p><strong>📚Obras:</strong> <em>A Lume</em>, <em>Quarta Dimensão</em></p>
+                <p>📝Poetisa e tradutora, conhecida pela sua poesia inovadora e pela tradução de obras de autores franceses. Também trabalhou na adaptação de textos para o teatro, baseada em obras de vários autores, incluindo Denis Diderot e auxiliou vários cineastas nacionais na produção de diálogos para filmes.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/ncfdEa8UL4Y" title="Vídeo sobre Ana Hatherly" allowfullscreen></iframe>
+            </div>
+        </div>
+
+              <div id="dulcemariacardoso" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('dulcemariacardoso')">&times;</span>
+                <h3>Dulce Maria Cardoso (n. 1964)</h3>
+                <p><strong>📚Obras:</strong> <em>O Retorno</em>, <em>Os Meus Sentimentos</em></p>
+                <p>📝Romancista, aborda temas como a emigração, a identidade e a memória. A sua obra foi editada em vários países, é estudada em diversas universidades e estão em curso propostas de adaptação cinematográfica de alguns dos seus contos e romances.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/xjqUcf4yteQ" title="Vídeo sobre Dulce Maria Cardoso" allowfullscreen></iframe>
+            </div>
+        </div>
+
+                <div id="adílialopes" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('adílialopes')">&times;</span>
+                <h3>Adília Lopes (1960-2024)</h3>
+                <p><strong>📚Obras:</strong> <em>O Poeta de Pondichéry</em>, <em>Manhã</em></p>
+                <p>📝Poetisa, conhecida pela sua escrita irreverente e pela abordagem de temas do quotidiano. Colaborou com poemas, artigos ou poemas traduzidos, em diversos jornais e revistas, nacionais e estrangeiros.</p>
+                <iframe width="100%" height="200" src="https://app.pt/adilia-lopes/" title="Vídeo sobre Adília Lopes" allowfullscreen></iframe>
+            </div>
+        </div>
+
+                 <div id="isabelafigueiredo" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('isabelafigueiredo')">&times;</span>
+                <h3>Isabela Figueiredo (n. 1963)</h3>
+                <p><strong>📚Obras:</strong> <em>A Gorda</em>, <em>Caderno de Memórias Coloniais</em></p>
+                <p>📝Escritora e jornalista, suas obras abordam questões de identidade, colonialismo e racismo.</p>
+                <iframe width="100%" height="200" src="https://www.youtube.com/emebed/ChYLk4tEX6c" title="Vídeo sobre Isabela Figueiredo" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto"; // Re-enable scrolling
+        }
+
+        // Fechar o modal quando clicar fora dele
+        window.onclick = function(event) {
+            if (event.target.className === "modal") {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto"; // Re-enable scrolling
+            }
+        }
+        
+        // Add futuristic hover effects to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = `0 0 20px ${getRandomColor()}`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 10px 25px rgba(255, 45, 117, 0.3)';
+            });
+        });
+        
+        function getRandomColor() {
+            const colors = ['#ff2d75', '#ff1493', '#ff5e8a', '#ff00aa'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
