@@ -438,61 +438,7 @@
     
 
 <script>
-function openTab(tabId) {
-    // Esconde todos os conteúdos de abas
-    var tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(function(tab) {
-        tab.style.display = 'none';
-    });
 
-    // Remove a classe 'active' de todos os botões
-    var buttons = document.querySelectorAll('.tab-button');
-    buttons.forEach(function(btn) {
-        btn.classList.remove('active');
-    });
-
-    // Mostra a aba clicada
-    document.getElementById(tabId).style.display = 'block';
-
-    // Ativa o botão atual
-    event.currentTarget.classList.add('active');
-}
-
-        function openTab(tabId) {
-            // Verifica se é a aba de timeline para redirecionar
-            if (tabId === 'timeline') {
-                window.location.href = 'linha_de_tempo.html';
-                return;
-            }
-            
-            // Verifica se é a aba de autores para redirecionar
-            if (tabId === 'authors') {
-                window.location.href = 'autores.html';
-                return;
-            }
-
-            // Verifica se é a aba de temas e luta para redirecionar
-            if (tabId === 'themes') {
-                window.location.href = 'Temas_lutas.html';
-                return;
-            }
-            
-            // Esconde todos os conteúdos
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Remove a classe 'active' de todos os botões
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // Mostra o conteúdo da aba selecionada
-            document.getElementById(tabId).classList.add('active');
-
-            // Ativa o botão clicado
-            event.currentTarget.classList.add('active');
-        }
         
         // Cria partículas para o efeito futurista
         function createParticles() {
