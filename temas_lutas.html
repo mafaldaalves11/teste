@@ -364,5 +364,40 @@
       </div>
     </section>
   </div>
+   <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto"; // Re-enable scrolling
+        }
+
+        // Fechar o modal quando clicar fora dele
+        window.onclick = function(event) {
+            if (event.target.className === "modal") {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto"; // Re-enable scrolling
+            }
+        }
+        
+        // Add futuristic hover effects to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = `0 0 20px ${getRandomColor()}`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 10px 25px rgba(255, 45, 117, 0.3)';
+            });
+        });
+        
+        function getRandomColor() {
+            const colors = ['#ff2d75', '#ff1493', '#ff5e8a', '#ff00aa'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+     <script>
 </body>
 </html>
