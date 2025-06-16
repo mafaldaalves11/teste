@@ -117,6 +117,13 @@
       border-radius: 10px;
     }
 
+    .card p {
+      margin: 15px 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff8fa3;
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -180,9 +187,27 @@
     <div class="galeria-futurista">
       <div class="card" onclick="openModal('modal1')">
         <img src="https://i.ibb.co/xtPnDFcS/Picsart-25-06-04-18-42-55-913.jpg" alt="Condição Feminina" />
+        <p>Condição Feminina</p>
       </div>
       <div class="card" onclick="openModal('modal2')">
         <img src="https://i.ibb.co/pjyqyZcS/Picsart-25-06-04-18-43-08-474.jpg" alt="Liberdade Sexual" />
+        <p>Liberdade Sexual</p>
+      </div>
+      <div class="card" onclick="openModal('modal3')">
+        <img src="https://i.ibb.co/67k7SHZV/Picsart-25-06-04-18-43-18-425.jpg" alt="Censura" />
+        <p>Censura</p>
+      </div>
+      <div class="card" onclick="openModal('modal4')">
+        <img src="https://i.ibb.co/jvn5z9n1/Picsart-25-06-04-18-44-00-615.jpg" alt="Maternidade" />
+        <p>Maternidade</p>
+      </div>
+      <div class="card" onclick="openModal('modal5')">
+        <img src="https://i.ibb.co/RFPtHrV/Picsart-25-06-04-18-43-35-229.jpg" alt="Identidade" />
+        <p>Identidade</p>
+      </div>
+      <div class="card" onclick="openModal('modal6')">
+        <img src="https://i.ibb.co/LdhWZTtY/Picsart-25-06-04-18-43-25-332.jpg" alt="Resistência" />
+        <p>Resistência</p>
       </div>
     </div>
   </div>
@@ -210,6 +235,58 @@
       <ul>
         <li><em>As luzes de Leonor</em>, Maria Teresa Horta</li>
         <li><em>A Última Dona</em>, Lídia Jorge</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal3')">&times;</span>
+      <h3>Censura</h3>
+      <p><em>A palavra silenciada — bocas caladas e livros rasgados.</em></p>
+      <p>Livros recomendados:</p>
+      <ul>
+        <li><em>Imprensa e I Guerra Mundial Censura e propaganda 1914-1918</em>, Noémia Malva Novais</li>
+        <li><em>As Novas Cartas Portuguesas</em>, "Três Marias"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal4" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal4')">&times;</span>
+      <h3>Maternidade</h3>
+      <p><em>Entre o cuidado e o abandono — o feminino como origem.</em></p>
+      <p>Livros recomendados:</p>
+      <ul>
+        <li><em>Não se pode morar nos olhos de um gato</em>, Ana Margarida de Carvalho</li>
+        <li><em>A Mãe de um Rio</em>, Agustina Bessa-Luís</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal5" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal5')">&times;</span>
+      <h3>Identidade</h3>
+      <p><em>Máscaras e espelhos — o que é ser mulher e autora?</em></p>
+      <p>Livros recomendados:</p>
+      <ul>
+        <li><em>Fado ou Dentro de Ti Ver o Mar</em>, Inês Pedrosa</li>
+        <li><em>O Regresso de Júlia Mann a Paraty</em>, Teolinda Gersão</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal6" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal6')">&times;</span>
+      <h3>Resistência</h3>
+      <p><em>Punhos erguidos, livros na mão — palavras como armas.</em></p>
+      <p>Livros recomendados:</p>
+      <ul>
+        <li><em>O Retorno</em>, Dulce Maria Cardoso</li>
+        <li><em>Um Bailarino na Batalha</em>, Hélia Correia</li>
       </ul>
     </div>
   </div>
