@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Temas e Lutas - Autorias Portuguesas</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a0a0a, #2a0a0a);
+      color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, #1a1a1a, #2a0a15);
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 30px rgba(216, 27, 96, 0.3);
+    }
+
+    .tab-button {
+      padding: 12px 25px;
+      background: rgba(216, 27, 96, 0.2);
+      border: 1px solid rgba(216, 27, 96, 0.5);
+      cursor: pointer;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #f8bbd0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9em;
+      transition: all 0.4s;
+    }
+
+    .tab-button:hover {
+      background: rgba(216, 27, 96, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .tab-button.active {
+      background: #d81b60;
+      color: white;
+      font-weight: bold;
+      border: 1px solid #d81b60;
+      box-shadow: 0 0 20px rgba(216, 27, 96, 0.5);
+    }
+
+    .container-futurista {
+      max-width: 1400px;
+      margin: auto;
+      padding: 3rem 1rem;
+    }
+
+    .header-futurista {
+      text-align: center;
+      padding: 3rem 0;
+      margin-bottom: 3rem;
+      border-bottom: 2px solid #ff3a6e;
+      background: rgba(30, 10, 15, 0.5);
+      box-shadow: 0 0 30px rgba(255, 58, 110, 0.2);
+    }
+
+    .header-futurista h1 {
+      font-size: 3.5rem;
+      color: #ff3a6e;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(255, 58, 110, 0.7);
+    }
+
+    .header-futurista p {
+      font-size: 1.5rem;
+      color: #ff8fa3;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .galeria-futurista {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 3rem;
+      justify-items: center;
+    }
+
+    .card {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 100%;
+      scroll-snap-align: start;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      background: rgba(255, 45, 117, 0.1);
+      border-radius: 12px;
+      padding: 0;
+      border: 2px solid rgba(255, 45, 117, 0.3);
+      box-shadow: 0 5px 15px rgba(255, 45, 117, 0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      background: rgba(255, 45, 117, 0.2);
+      box-shadow: 0 10px 25px rgba(255, 45, 117, 0.3);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: linear-gradient(145deg, #2a0015, #1a000d);
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 800px;
+      color: #f0f0f0;
+    }
+
+    .close {
+      float: right;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .modal h3 {
+      font-size: 2rem;
+      margin-top: 0;
+      text-align: center;
+      color: #ff3a6e;
+    }
+
+    .modal p, .modal li {
+      font-size: 1.1rem;
+      color: #f0c0d0;
+    }
+  </style>
+</head>
+<body>
+  <div class="tab-container">
+    <button class="tab-button active">Home</button>
+    <button class="tab-button">Linha do Tempo</button>
+    <button class="tab-button">Autoras</button>
+    <button class="tab-button">Temas e Lutas</button>
+    <button class="tab-button">Quizes</button>
+    <button class="tab-button">Homenagens Turísticas</button>
+  </div>
+
+  <div class="container-futurista">
+    <header class="header-futurista">
+      <h1>Autorias Portuguesas</h1>
+      <p>Explorando as vozes femininas na literatura portuguesa contemporânea</p>
+    </header>
+
+    <div class="galeria-futurista">
+      <div class="card" onclick="openModal('modal1')">
+        <img src="https://i.ibb.co/xtPnDFcS/Picsart-25-06-04-18-42-55-913.jpg" alt="Condição Feminina" />
+      </div>
+      <div class="card" onclick="openModal('modal2')">
+        <img src="https://i.ibb.co/pjyqyZcS/Picsart-25-06-04-18-43-08-474.jpg" alt="Liberdade Sexual" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Modais -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal1')">&times;</span>
+      <h3>Condição Feminina</h3>
+      <p><em>Reflexo da mulher na sociedade – fragmentos da identidade imposta.</em></p>
+      <p>Livros recomendados:</p>
+      <ul>
+        <li><em>O dia dos prodígios</em>, Lídia Jorge</li>
+        <li><em>A Sibilia</em>, Agustina Bessa-Luís</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal2')">&times;</span>
+      <h3>Liberdade Sexual</h3>
+      <p><em>O corpo como território de libertação.</em></p>
+      <p>Livros recomendados:</p>
+      <ul>
+        <li><em>As luzes de Leonor</em>, Maria Teresa Horta</li>
+        <li><em>A Última Dona</em>, Lídia Jorge</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+  </script>
+</body>
+</html>
