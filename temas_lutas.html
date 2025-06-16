@@ -1,79 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Temas e Lutas - Autorias Portuguesas</title>
   <style>
-    * {
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a0a0a, #2a0a0a);
+      color: #f0f0f0;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background: linear-gradient(135deg, #1a0a0a 0%, #2a0a0a 100%);
-      color: #f0f0f0;
-      min-height: 100vh;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
     .tab-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            background: linear-gradient(90deg, #1a1a1a 0%, #2a0a15 100%);
-            padding: 15px;
-            flex-wrap: wrap;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 30px rgba(216, 27, 96, 0.3);
-        }
-        
-        .tab-button {
-            padding: 12px 25px;
-            background: rgba(216, 27, 96, 0.2);
-            border: 1px solid rgba(216, 27, 96, 0.5);
-            cursor: pointer;
-            border-radius: 30px;
-            transition: all 0.4s;
-            font-weight: 600;
-            color: #f8bbd0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9em;
-        }
-        
-        .tab-button:hover {
-            background: rgba(216, 27, 96, 0.4);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
-        }
-        
-        .tab-button.active {
-            background: #d81b60;
-            color: white;
-            font-weight: bold;
-            border: 1px solid #d81b60;
-            box-shadow: 0 0 20px rgba(216, 27, 96, 0.5);
-        }
-        
-        .tab-content {
-            display: none;
-            padding: 0;
-            animation: fadeIn 0.5s;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, #1a1a1a, #2a0a15);
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 30px rgba(216, 27, 96, 0.3);
+    }
 
+    .tab-button {
+      padding: 12px 25px;
+      background: rgba(216, 27, 96, 0.2);
+      border: 1px solid rgba(216, 27, 96, 0.5);
+      cursor: pointer;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #f8bbd0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9em;
+      transition: all 0.4s;
+    }
 
-   .container-futurista {
+    .tab-button:hover {
+      background: rgba(216, 27, 96, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .tab-button.active {
+      background: #d81b60;
+      color: white;
+      font-weight: bold;
+      border: 1px solid #d81b60;
+      box-shadow: 0 0 20px rgba(216, 27, 96, 0.5);
+    }
+
+    .container-futurista {
       max-width: 1400px;
       margin: auto;
       padding: 3rem 1rem;
@@ -138,6 +117,13 @@
       border-radius: 10px;
     }
 
+    .card p {
+      margin: 15px 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff8fa3;
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -180,16 +166,6 @@
       font-size: 1.1rem;
       color: #f0c0d0;
     }
-@media (max-width: 768px) {
-    .card {
-        width: 90%;
-    }
-
-    .card img {
-        height: 220px;
-    }
-}
-    
   </style>
 </head>
 <body>
